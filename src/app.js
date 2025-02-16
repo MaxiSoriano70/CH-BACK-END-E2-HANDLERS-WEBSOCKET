@@ -69,12 +69,16 @@ io.on("connection", (socket) => {
             if(respuesta === 1){
                 console.error("Error al eliminar producto");
             }
-            io.emit("productoEliminado", productoId);
+            /* Para el usuario que elimino */
+            socket.emit("productoEliminado", productoId);
+            /* Para los demas usuarios */
+            socket.broadcast.emit("productoRemovido", productoId);
         } catch (error) {
             console.error("Error en el servidor al eliminar producto", error);
         }
     });
 });
+
 
 
 server.listen(8081, () =>{

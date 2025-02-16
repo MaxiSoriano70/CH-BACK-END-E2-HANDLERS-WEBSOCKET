@@ -127,3 +127,11 @@ socket.on("productoEliminado", (productoId) => {
         Swal.fire("Eliminado", "El producto ha sido eliminado.", "success");
     }
 });
+
+socket.on("productoRemovido", (productoId) => {
+    const productoElement = document.getElementById(`producto${productoId}`);
+    if (productoElement) {
+        productoElement.remove();
+    }
+});
+
