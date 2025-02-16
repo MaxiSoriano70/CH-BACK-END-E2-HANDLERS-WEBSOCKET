@@ -42,5 +42,27 @@
     "estado": true,
     "categoria": "ropa deportiva",
     "urlImagen": "https://kickoffshopper.com/wp-content/uploads/2024/07/AS-Roma-Home-PAREDES-16-Jersey-24-25.png"
+  },
+  {
+    "id": 6,
+    "titulo": "Camiseta Totti",
+    "descripcion": "Camiseta de Franchesco Totti 10",
+    "precio": 150,
+    "codigo": "ROMAT10",
+    "stock": 100,
+    "estado": true,
+    "categoria": "ropa deportiva",
+    "urlImagen": "https://http2.mlstatic.com/D_NQ_NP_2X_773129-MLA53306401931_012023-F.webp"
+  },
+  {
+    "id": 7,
+    "titulo": "Romulo",
+    "descripcion": "Peluche de romulo",
+    "precio": 75,
+    "codigo": "ROMOPELU",
+    "stock": 100,
+    "estado": true,
+    "categoria": "juguetes",
+    "urlImagen": "https://m.media-amazon.com/images/I/71pf-PBF3BL.__AC_SX300_SY300_QL70_ML2_.jpg"
   }
 ]

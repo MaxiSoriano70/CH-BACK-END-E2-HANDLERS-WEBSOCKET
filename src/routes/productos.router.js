@@ -44,7 +44,7 @@ productosRouter.delete("/:id", (req, res) => {
     const id = parseInt(req.params.id);
     const respuesta = manager.eliminarProducto(id);
     if(respuesta === 1){
-        res.status(400).send({ message: "Error al editar el producto" });
+        res.status(400).send({ message: "Error al eliminar el producto" });
     }
     res.status(201).send({ message : respuesta});
 });

@@ -5,6 +5,7 @@ import { engine } from "express-handlebars";
 import { Server } from "socket.io";
 import http from "http";
 import viewsRouter from "./routes/views.router.js";
+import ProductoManager from "./ProductoManager.js";
 
 const app = express();
 
@@ -28,11 +29,54 @@ app.use("/api/carritos", carritosRouter);
 
 app.use("/", viewsRouter);
 
+const productoManager = new ProductoManager("./src/data/productos.json")
 /* Web Socket */
-io.on("connection", (socket)=>{
+io.on("connection", (socket) => {
     console.log("Nuevo usuario conectado");
+
+    socket.on("nuevoProducto", async(productoDatos) => {
+        try {
+            console.log("Producto recibido en el servidor:", productoDatos);
+            const nuevoProducto = await productoManager.agregarProducto(
+                productoDatos["titulo"],
+                productoDatos["descripcion"],
+                Number(productoDatos["precio"]),
+                productoDatos["codigo"],
+                Number(productoDatos["stock"]),
+                productoDatos["categoria"],
+                productoDatos["urlImagen"]
+            );
+            if (nuevoProducto === 1) {
+                console.error("Error al crear un nuevo producto");
+            }
+
+            if (typeof nuevoProducto === "string") {
+                console.error(nuevoProducto);
+            }
+
+            io.emit("productoAgregado", nuevoProducto);
+        } catch (error) {
+            console.error("Error al agregar producto");
+        }
+    });
 });
 
-server.listen(8080, () =>{
-    console.log("Servidor iniciado en: http://localhost:8080");
+io.on("connection", (socket) => {
+    socket.on("eliminarProducto", async (productoId) => {
+        try {
+            const id = parseInt(productoId);
+            const respuesta = await productoManager.eliminarProducto(id);
+            if(respuesta === 1){
+                console.error("Error al eliminar producto");
+            }
+            io.emit("productoEliminado", productoId);
+        } catch (error) {
+            console.error("Error en el servidor al eliminar producto", error);
+        }
+    });
+});
+
+
+server.listen(8081, () =>{
+    console.log("Servidor iniciado en: http://localhost:8081");
 });

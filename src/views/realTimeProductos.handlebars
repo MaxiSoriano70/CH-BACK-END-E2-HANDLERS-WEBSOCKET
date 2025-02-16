@@ -16,7 +16,7 @@
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body bg-color-fondo">
-                    <form id="form-agregar-producto" action="http://localhost:8081/user" method="POST">
+                    <form id="form-agregar-producto">
                         <div class="mb-3">
                             <label for="tituloProducto" class="form-label fw-bolder">Titulo</label>
                             <input type="text" class="form-control bg-input" id="tituloProducto" placeholder="Ingrese titulo del producto"
@@ -25,7 +25,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="descripcionProducto" class="form-label fw-bolder">Descripción producto</label>
-                            <textarea class="form-control bg-input" id="descripcionProducto" rows="3" placeholder="Ingrese la descripción del producto"></textarea>
+                            <textarea class="form-control bg-input" id="descripcionProducto" rows="3" placeholder="Ingrese la descripción del producto" name="descripcion"></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="precioProducto" class="form-label fw-bolder">Precio</label>
@@ -71,7 +71,7 @@
             </div>
         </section>
     </section>
-    <section class="d-flex align-items-stretch justify-content-around flex-wrap">
+    <section class="d-flex align-items-stretch justify-content-around flex-wrap" id="contenedorDeProductos">
     {{#each productos}}
     <div class="card m-2 d-flex flex-column" style="width: 18rem; min-height: 400px;" id="producto{{this.id}}">
         <img src="{{this.urlImagen}}" class="card-img-top" alt="Imagen del producto" style="height: 200px; object-fit: cover;">
@@ -151,7 +151,7 @@
                         </div>
                     </div>
                 </section>
-                <a href="#" class="btn btn-personalized-1 m-1 fw-bold">Eliminar</a>
+                <button class="btn btn-personalized-1 m-1 fw-bold" onclick="eliminarProducto('{{this.id}}')">Eliminar</button>
             </div>
         </div>
     </div>
